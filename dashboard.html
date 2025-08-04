@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Capacita TG</title>
+    <link rel="icon" href="/src/imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="/src/css/dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=PT+Serif:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="header-branding">
+                        <img src="/src/imgs/logo-arp.png" alt="Símbolo do Exército Brasileiro" class="logo-military">
+                        <h1><a href="index.html">Capacita TG</a></h1>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="index.html" class="btn btn-secondary">Voltar ao Início</a>
+                    <button class="btn btn-danger" id="logoutBtn">Sair</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <span id="userInitial"></span>
+                    </div>
+                    <div class="profile-info">
+                        <h2 id="userName">Carregando...</h2>
+                        <p id="userEmail"></p>
+                    </div>
+                </div>
+                <div class="profile-body">
+                    <h3>Detalhes do Cadastro</h3>
+                    <div class="details-grid">
+                        <div class="detail-item">
+                            <span class="detail-label">Tipo de Usuário</span>
+                            <span class="detail-value" id="userType"></span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Cidade</span>
+                            <span class="detail-value" id="userCity"></span>
+                        </div>
+                        <div class="detail-item" id="tgUnitContainer">
+                            <span class="detail-label">Unidade do Tiro de Guerra</span>
+                            <span class="detail-value" id="userTgUnit"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-footer">
+                    <h3>Acesso Rápido</h3>
+                    <div class="quick-actions">
+                        <a href="index.html#cursos" class="action-link">Ver Cursos</a>
+                        <a href="entrar.html" class="action-link">Editar Cadastro</a>
+                        <a href="index.html#contato" class="action-link">Suporte</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/src/js/dashboard.js"></script>
+</body>
+</html>
