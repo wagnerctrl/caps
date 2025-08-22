@@ -229,8 +229,8 @@
     <div class="modal-overlay" id="userProfileModal">
         <div class="modal">
             <div class="modal-header">
-                <img src="/src/imgs/capacitatg.png" 
-                     alt="Logo Capacita TG">
+                <img src="/src/imgs/logo-arp.png" 
+                     alt="Logo da Prefeitura de Arapiraca">
                 <h3>Perfil do Usuário</h3>
                 <p>Suas informações de acesso</p>
             </div>
@@ -251,7 +251,7 @@
     <div class="modal-overlay" id="logoutConfirmModal">
         <div class="modal">
             <div class="modal-header">
-                <img src="/src/imgs/capacitatg.png" 
+                <img src="/src/imgs/logo-arp.png" 
                      alt="Logo Capacita TG">
                 <h3>Confirmar Logout</h3>
                 <p>Tem certeza que deseja sair?</p>
@@ -271,7 +271,7 @@
     <div class="modal-overlay" id="successModal">
         <div class="modal">
             <div class="modal-header">
-                <img src="/src/imgs/capacitatg.png" 
+                <img src="/src/imgs/logo-arp.png" 
                      alt="Logo Capacita TG">
                 <h3 id="successTitle">Sucesso!</h3>
                 <p id="successMessage">Operação realizada com sucesso!</p>
@@ -285,7 +285,7 @@
     <div class="modal-overlay" id="systemAccessModal">
         <div class="modal">
             <div class="modal-header">
-                <img src="/src/imgs/capacitatg.png" 
+                <img src="/src/imgs/logo-arp.png" 
                      alt="Logo Capacita TG">
                 <h3>Acessar Sistema</h3>
                 <p>Redirecionando para a área principal</p>
@@ -338,6 +338,7 @@
 
     <script src="/src/js/main.js"></script>
     <script src="/src/js/header-control.js"></script>
+    <script src="/src/js/auth.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Smooth scroll para links internos
@@ -399,11 +400,6 @@
             showModal('successModal');
         }
 
-        // Verificar se usuário já está logado ao carregar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            checkLoggedInUser();
-            setupModalEvents();
-        });
 
         function setupModalEvents() {
             // Fechar modais clicando no overlay
@@ -432,7 +428,9 @@
 
             document.getElementById('confirmLogout').addEventListener('click', function() {
                 hideModal('logoutConfirmModal');
-                performLogout();
+                if (window.authSystem) {
+                    window.authSystem.logout();
+                }
             });
 
             document.getElementById('closeSuccessModal').addEventListener('click', function() {
@@ -445,75 +443,19 @@
             });
         }
 
-        function checkLoggedInUser() {
-            const userData = localStorage.getItem('capacitaTgUser');
+        // Configurar eventos após carregamento
+        document.addEventListener('DOMContentLoaded', function() {
+            setupModalEvents();
             
-            if (userData) {
-                const user = JSON.parse(userData);
-                updateHeaderButton(user, true);
-            } else {
-                updateHeaderButton(null, false);
-            }
-        }
+            // Configurar evento para modal de login necessário
+            document.getElementById('cancelLoginBtn').addEventListener('click', function() {
+                hideModal('loginRequiredModal');
+            });
 
-        function updateHeaderButton(user, isLoggedIn) {
-            const headerLoginBtn = document.getElementById('headerLoginBtn');
-            
-            if (isLoggedIn && user) {
-                headerLoginBtn.innerHTML = `
-                    <div class="user-info-header">
-                        <span class="user-name-header">${user.nome.split(' ')[0]} ${user.nome.split(' ')[1] || ''}</span>
-                        <span class="user-type-header">${user.tipoUsuario === 'atirador' ? 'Atirador' : 'Empregador'}</span>
-                    </div>
-                `;
-                headerLoginBtn.classList.add('logged-in');
-            } else {
-                headerLoginBtn.textContent = 'Acessar';
-                headerLoginBtn.classList.remove('logged-in');
-                headerLoginBtn.style.background = '';
-                headerLoginBtn.style.color = '';
-            }
-            
-            // Update mobile login button as well
-            if (window.headerController && window.headerController.updateMobileLoginButton) {
-                window.headerController.updateMobileLoginButton(user, isLoggedIn);
-            }
-        }
-
-        function performLogout() {
-            // Remover dados do localStorage
-            localStorage.removeItem('capacitaTgUser');
-            
-            // Restaurar botão do header
-            updateHeaderButton(null, false);
-            
-            showSuccessModal('Logout Realizado', 'Você foi desconectado com sucesso!');
-        }
-
-        // Clique no botão do header - SIMPLIFICADO
-        document.getElementById('headerLoginBtn').addEventListener('click', function() {
-            const userData = localStorage.getItem('capacitaTgUser');
-            if (userData) {
-                // Se estiver logado, mostrar modal com informações do usuário
-                const user = JSON.parse(userData);
-                document.getElementById('modalUserName').textContent = user.nome;
-                document.getElementById('modalUserEmail').textContent = user.email;
-                document.getElementById('modalUserType').textContent = 
-                    user.tipoUsuario === 'atirador' ? 'Atirador' : 'Empregador';
-                showModal('userProfileModal');
-            } else {
-                // Se não estiver logado, redirecionar diretamente para entrar.html
+            document.getElementById('goToLoginBtn').addEventListener('click', function() {
+                hideModal('loginRequiredModal');
                 window.location.href = 'entrar.html';
-            }
-        });
-        document.getElementById('mobileLoginBtn').addEventListener('click', function() {
-            const userData = localStorage.getItem('capacitaTgUser');
-            if (userData) {
-                window.location.href = 'entrar.html';
-            } else {
-                // Se não estiver logado, redirecionar para entrar.html
-                window.location.href = 'entrar.html';
-            }
+            });
         });
     </script>
     <script>

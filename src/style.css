@@ -696,6 +696,20 @@ header.header-visible {
     background: var(--light-gray-bg);
 }
 
+/* Adicione estas regras no final do arquivo src/style.css */
+/* .special-cards-container .course-card:last-child {
+    grid-column: 1 / -1; 
+    justify-self: center; 
+    max-width: 320px; 
+} */
+
+/* Para ajustar a posição do card 'Vagas Disponíveis Sine', que se torna o penúltimo */
+/* .special-cards-container .course-card:nth-last-child(2) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    max-width: 320px;
+} */
+
 .program-content {
     display: flex;
     gap: 3rem;

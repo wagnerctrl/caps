@@ -1,5 +1,6 @@
 // Sistema de controle de cabeçalho
 class HeaderController {
+
     constructor() {
         this.header = document.querySelector('header');
         this.mobileToggle = null;
