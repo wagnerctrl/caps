@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Candidato | Capacita Arapiraca</title>
+    <link rel="icon" href="/src/imgs/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="header-branding">
+                        <img src="/src/imgs/logo-arp.png" 
+                             alt="Símbolo da Prefeitura de Arapiraca" 
+                             class="logo-military">
+                        <div class="brand-title-container">
+                            <h1><a href="/">Capacita Arapiraca</a></h1>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-right">
+                    <div class="header-actions">
+                        <button class="btn btn-login" id="headerLoginBtn">Carregando...</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="welcome-section">
+                    <h1>Bem-vindo ao seu Dashboard</h1>
+                    <p id="welcomeMessage">Carregando informações...</p>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-primary" id="editProfileBtn">
+                        <span>✏️</span>
+                        Editar Perfil
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Perfil do Candidato -->
+                <div class="dashboard-card profile-card">
+                    <div class="card-header">
+                        <h3>Meu Perfil</h3>
+                        <span class="card-icon">👤</span>
+                    </div>
+                    <div class="card-content" id="profileContent">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Carregando perfil...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cursos Recomendados -->
+                <div class="dashboard-card courses-card">
+                    <div class="card-header">
+                        <h3>Cursos Recomendados</h3>
+                        <span class="card-icon">📚</span>
+                    </div>
+                    <div class="card-content" id="coursesContent">
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Carregando cursos...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estatísticas -->
+                <div class="dashboard-card stats-card">
+                    <div class="card-header">
+                        <h3>Suas Estatísticas</h3>
+                        <span class="card-icon">📊</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-number" id="coursesCompleted">0</div>
+                                <div class="stat-label">Cursos Concluídos</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="certificatesEarned">0</div>
+                                <div class="stat-label">Certificados</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="profileViews">0</div>
+                                <div class="stat-label">Visualizações do Perfil</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ações Rápidas -->
+                <div class="dashboard-card actions-card">
+                    <div class="card-header">
+                        <h3>Ações Rápidas</h3>
+                        <span class="card-icon">⚡</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="quick-actions">
+                            <a href="/empreend.html" class="action-btn">
+                                <span class="action-icon">🚀</span>
+                                <span class="action-text">Cursos de Empreendedorismo</span>
+                            </a>
+                            <a href="/primeiroemprego.html" class="action-btn">
+                                <span class="action-icon">💼</span>
+                                <span class="action-text">Primeiro Emprego</span>
+                            </a>
+                            <a href="/financ.html" class="action-btn">
+                                <span class="action-icon">💰</span>
+                                <span class="action-text">Educação Financeira</span>
+                            </a>
+                            <a href="/habitos.html" class="action-btn">
+                                <span class="action-icon">🥗</span>
+                                <span class="action-text">Hábitos Saudáveis</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Edição de Perfil -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="modal modal-large">
+            <div class="modal-header">
+                <img src="/src/imgs/logo-arp.png" alt="Logo Capacita TG">
+                <h3>Editar Perfil</h3>
+                <button class="modal-close" id="closeEditModal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <form id="editProfileForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editNome">Nome Completo</label>
+                            <input type="text" id="editNome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editEmail">Email</label>
+                            <input type="email" id="editEmail" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="editTelefone">Telefone</label>
+                            <input type="tel" id="editTelefone">
+                        </div>
+                        <div class="form-group">
+                            <label for="editCidade">Cidade</label>
+                            <input type="text" id="editCidade">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editHabilidades">Habilidades</label>
+                        <textarea id="editHabilidades" rows="3" placeholder="Descreva suas principais habilidades..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editExperiencia">Experiência Profissional</label>
+                        <textarea id="editExperiencia" rows="3" placeholder="Descreva sua experiência profissional..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editFormacao">Formação</label>
+                        <textarea id="editFormacao" rows="3" placeholder="Descreva sua formação acadêmica..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="cancelEditBtn">Cancelar</button>
+                <button type="submit" form="editProfileForm" class="btn btn-primary" id="saveProfileBtn">
+                    <span class="btn-text">Salvar Alterações</span>
+                    <span class="btn-loading" style="display: none;">
+                        <span class="spinner"></span>
+                        Salvando...
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modais de Autenticação -->
+    <div class="modal-overlay" id="userProfileModal">
+        <div class="modal">
+            <div class="modal-header">
+                <img src="/src/imgs/logo-arp.png" alt="Logo Capacita TG">
+                <h3>Perfil do Usuário</h3>
+                <p>Suas informações de acesso</p>
+            </div>
+            <div class="modal-content">
+                <div class="modal-info">
+                    <p><strong>Nome:</strong> <span id="modalUserName"></span></p>
+                    <p><strong>Email:</strong> <span id="modalUserEmail"></span></p>
+                    <p><strong>Tipo:</strong> <span id="modalUserType"></span></p>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-danger" id="modalLogout">Fazer Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="logoutConfirmModal">
+        <div class="modal">
+            <div class="modal-header">
+                <img src="/src/imgs/logo-arp.png" alt="Logo Capacita TG">
+                <h3>Confirmar Logout</h3>
+                <p>Tem certeza que deseja sair?</p>
+            </div>
+            <div class="modal-content">
+                <p style="text-align: center; color: #6c757d;">
+                    Você será desconectado do sistema e precisará fazer login novamente.
+                </p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="cancelLogout">Cancelar</button>
+                <button class="btn btn-danger" id="confirmLogout">Sair</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-header">
+                <img src="/src/imgs/logo-arp.png" alt="Logo Capacita TG">
+                <h3 id="successTitle">Sucesso!</h3>
+                <p id="successMessage">Operação realizada com sucesso!</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="closeSuccessModal">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Capacita Arapiraca</h3>
+                    <p>Sua jornada de sucesso começa aqui.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="/">Início</a></li>
+                        <li><a href="/empreend.html">Empreendedorismo</a></li>
+                        <li><a href="/primeiroemprego.html">Primeiro Emprego</a></li>
+                        <li><a href="/financ.html">Educação Financeira</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <p>Email: capacitaarapiraca0@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CapacitaArapiraca. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/src/js/auth.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

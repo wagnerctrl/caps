@@ -5,6 +5,9 @@
     "vercel-build": "echo 'No build required'"
   },
   "dependencies": {
-    "@vercel/speed-insights": "^1.2.0"
+    "@vercel/speed-insights": "^1.2.0",
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "jsonwebtoken": "^9.0.2"
   }
 }
